@@ -619,7 +619,19 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         double yyLow = rangeAxis.valueToJava2D(yLow, dataArea, edge);
         double yyOpen = rangeAxis.valueToJava2D(yOpen, dataArea, edge);
         double yyClose = rangeAxis.valueToJava2D(yClose, dataArea, edge);
-
+        Paint p = getItemPaint(series, item);
+        Paint outlinePaint = null;
+        if (this.useOutlinePaint) {
+            outlinePaint = getItemOutlinePaint(series, item);
+        }
+        Stroke s = getItemStroke(series, item);
+        g2.setStroke(s);
+        if (this.useOutlinePaint) {
+            g2.setPaint(outlinePaint);
+        }
+        else {
+            g2.setPaint(p);
+        }
         double volumeWidth;
         double stickWidth;
         if (this.candleWidth > 0) {
@@ -679,16 +691,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             volumeWidth = Math.max(Math.min(1, this.maxCandleWidth), xxWidth);
             stickWidth = Math.max(Math.min(3, this.maxCandleWidth), xxWidth);
         }
-
-        Paint p = getItemPaint(series, item);
-        Paint outlinePaint = null;
-        if (this.useOutlinePaint) {
-            outlinePaint = getItemOutlinePaint(series, item);
-        }
-        Stroke s = getItemStroke(series, item);
-
-        g2.setStroke(s);
-
         if (this.drawVolume) {
             int volume = (int) highLowData.getVolumeValue(series, item);
             double volumeHeight = volume / this.maxVolume;
@@ -721,14 +723,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
 
             g2.setComposite(originalComposite);
         }
-
-        if (this.useOutlinePaint) {
-            g2.setPaint(outlinePaint);
-        }
-        else {
-            g2.setPaint(p);
-        }
-
         double yyMaxOpenClose = Math.max(yyOpen, yyClose);
         double yyMinOpenClose = Math.min(yyOpen, yyClose);
         double maxOpenClose = Math.max(yOpen, yClose);
@@ -778,7 +772,6 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             else {
                 g2.setPaint(p);
             }
-            g2.fill(body);
         }
         else {
             if (this.downPaint != null) {
@@ -787,14 +780,8 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
             else {
                 g2.setPaint(p);
             }
-            g2.fill(body);
         }
-        if (this.useOutlinePaint) {
-            g2.setPaint(outlinePaint);
-        }
-        else {
-            g2.setPaint(p);
-        }
+        g2.fill(body);
         g2.draw(body);
 
         // add an entity for the item...
@@ -895,5 +882,4 @@ public class CandlestickRenderer extends AbstractXYItemRenderer
         this.downPaint = SerialUtils.readPaint(stream);
         this.volumePaint = SerialUtils.readPaint(stream);
     }
-
 }
