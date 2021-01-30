@@ -6,9 +6,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <name>JFreeChart-2.0</name>
+    <name>JFreeChart-zgh</name>
 
-    <artifactId>jfreechart</artifactId>
+    <artifactId>jfreechart-zgh</artifactId>
     <groupId>org.jfree</groupId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -24,6 +24,7 @@
         Utilising the Java2D API, it supports a wide range of chart types including
         bar charts, pie charts, line charts, XY-plots, time series plots, Sankey charts
         and more.
+        This is a forked version to overcome slow PR analysis in the original repository.
     </description>
 
     <url>http://www.jfree.org/jfreechart/</url>
@@ -119,7 +120,7 @@
                     <docfilessubdirs>true</docfilessubdirs>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
