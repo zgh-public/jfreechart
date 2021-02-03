@@ -4,6 +4,7 @@ JFreeChart
 Version 2.0.0, not yet released.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.jfree/jfreechart)
+org.jfree.zgh:jfreechart is a forked version to overcome slow PR analysis in the original repository.
 
 Overview
 --------
